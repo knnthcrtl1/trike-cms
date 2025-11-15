@@ -53,6 +53,18 @@ export default function AppLayout({ children, title = "Home", user }) {
                                 >
                                     Fares
                                 </Link>
+                                <Link
+                                    href="/admin/roles"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Roles
+                                </Link>
+                                <Link
+                                    href="/admin/permissions"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Permissions
+                                </Link>
                             </>
                         )}
                         {user && (

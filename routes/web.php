@@ -55,6 +55,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::resource('drivers', \App\Http\Controllers\Admin\DriverController::class);
         Route::resource('routes', \App\Http\Controllers\Admin\RouteController::class);
         Route::resource('fares', \App\Http\Controllers\Admin\FareController::class);
+        Route::resource('roles', \App\Http\Controllers\Admin\RoleController::class);
+        Route::resource('permissions', \App\Http\Controllers\Admin\PermissionController::class);
     });
 
     // Dispatcher (and admin) for dispatch operations

@@ -1,7 +1,7 @@
 import { Head, useForm, Link } from "@inertiajs/react";
 import AppLayout from "@/Layouts/AppLayout";
 
-export default function CreateUser() {
+export default function CreateUser({ availableRoles }) {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
@@ -15,7 +15,7 @@ export default function CreateUser() {
         post('/admin/users');
     };
 
-    const roles = ['admin', 'dispatcher', 'driver', 'user'];
+    const roles = availableRoles || ['admin', 'dispatcher', 'driver', 'user'];
 
     return (
         <AppLayout title="Create User">

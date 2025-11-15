@@ -34,7 +34,9 @@ class UserController extends Controller
 
     public function create()
     {
-        return Inertia::render('Admin/Users/Create');
+        return Inertia::render('Admin/Users/Create', [
+            'availableRoles' => \Spatie\Permission\Models\Role::all()->pluck('name'),
+        ]);
     }
 
     public function store(Request $request)
@@ -75,6 +77,7 @@ class UserController extends Controller
                 'is_active' => $user->is_active,
                 'roles' => $user->getRoleNames(),
             ],
+            'availableRoles' => \Spatie\Permission\Models\Role::all()->pluck('name'),
         ]);
     }
 

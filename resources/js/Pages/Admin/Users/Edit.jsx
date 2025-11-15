@@ -1,7 +1,7 @@
 import { Head, useForm, Link } from "@inertiajs/react";
 import AppLayout from "@/Layouts/AppLayout";
 
-export default function EditUser({ user }) {
+export default function EditUser({ user, availableRoles }) {
     const { data, setData, put, processing, errors } = useForm({
         name: user.name || '',
         email: user.email || '',
@@ -19,7 +19,7 @@ export default function EditUser({ user }) {
         put(`/admin/users/${user.id}`);
     };
 
-    const roles = ['admin', 'dispatcher', 'driver', 'user'];
+    const roles = availableRoles || ['admin', 'dispatcher', 'driver', 'user'];
 
     return (
         <AppLayout title="Edit User">
