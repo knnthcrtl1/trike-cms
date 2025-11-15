@@ -22,17 +22,39 @@ export default function AppLayout({ children, title = "Home", user }) {
                             Home
                         </Link>
                         <Link
-                            href="/trips"
+                            href="/dispatch/trips"
                             className="text-sm text-gray-600 hover:text-gray-900"
                         >
                             Dispatch
                         </Link>
-                        <Link
-                            href="/admin/users"
-                            className="text-sm text-gray-600 hover:text-gray-900"
-                        >
-                            Admin
-                        </Link>
+                        {user?.roles?.includes('admin') && (
+                            <>
+                                <Link
+                                    href="/admin/users"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Users
+                                </Link>
+                                <Link
+                                    href="/admin/drivers"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Drivers
+                                </Link>
+                                <Link
+                                    href="/admin/routes"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Routes
+                                </Link>
+                                <Link
+                                    href="/admin/fares"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Fares
+                                </Link>
+                            </>
+                        )}
                         {user && (
                             <form onSubmit={logout}>
                                 <button className="text-sm text-gray-600 hover:text-gray-900">

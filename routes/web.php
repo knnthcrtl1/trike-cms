@@ -27,7 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Admin-only
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::resource('users', UserController::class);
-        // roles, fares, routes, reports…
+        Route::resource('drivers', \App\Http\Controllers\Admin\DriverController::class);
+        Route::resource('routes', \App\Http\Controllers\Admin\RouteController::class);
+        Route::resource('fares', \App\Http\Controllers\Admin\FareController::class);
     });
 
     // Dispatcher (and admin) for dispatch operations
