@@ -10,7 +10,32 @@ use App\Http\Controllers\Dispatch\TripController;
 // Single root route: Home for authed users, Welcome for guests
 Route::get('/', function () {
     if (auth()->check()) {
-        return Inertia::render('Home');
+        $today = now()->startOfDay();
+        
+        // Total trips today
+        $totalTripsToday = \App\Models\Trip::whereDate('created_at', today())->count();
+        
+        // Active drivers (drivers with is_active = true)
+        $activeDrivers = \App\Models\User::drivers()->where('is_active', true)->count();
+        
+        // Completed trips today
+        $completedTripsToday = \App\Models\Trip::where('status', 'completed')
+            ->whereDate('updated_at', today())
+            ->count();
+        
+        // Revenue (sum of fares from completed trips today)
+        $revenueToday = \App\Models\Trip::where('status', 'completed')
+            ->whereDate('updated_at', today())
+            ->sum('fare') ?? 0;
+
+        return Inertia::render('Home', [
+            'metrics' => [
+                'totalTripsToday' => $totalTripsToday,
+                'activeDrivers' => $activeDrivers,
+                'completedTripsToday' => $completedTripsToday,
+                'revenueToday' => number_format($revenueToday, 2),
+            ],
+        ]);
     }
 
     return Inertia::render('Welcome', [
