@@ -74,7 +74,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Regular user (rider)
     Route::middleware('role:user')->prefix('ride')->name('ride.')->group(function () {
-        Route::post('request', [\App\Http\Controllers\RideController::class,'store'])->name('request');
+        Route::get('request', [\App\Http\Controllers\RideController::class,'create'])->name('request');
+        Route::post('request', [\App\Http\Controllers\RideController::class,'store'])->name('request.store');
+        Route::post('estimate', [\App\Http\Controllers\RideController::class,'estimateFare'])->name('estimate');
         Route::get('history',  [\App\Http\Controllers\RideController::class,'index'])->name('history');
     });
 

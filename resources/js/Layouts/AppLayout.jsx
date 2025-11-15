@@ -21,6 +21,22 @@ export default function AppLayout({ children, title = "Home", user }) {
                         >
                             Home
                         </Link>
+                        {user?.roles?.includes('user') && (
+                            <>
+                                <Link
+                                    href="/ride/request"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    Request Ride
+                                </Link>
+                                <Link
+                                    href="/ride/history"
+                                    className="text-sm text-gray-600 hover:text-gray-900"
+                                >
+                                    My Rides
+                                </Link>
+                            </>
+                        )}
                         <Link
                             href="/dispatch/trips"
                             className="text-sm text-gray-600 hover:text-gray-900"
